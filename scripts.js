@@ -10,27 +10,6 @@ var iframe = document.getElementById('video-stream');
 //   imageStream.style.height = '200px';
 // }
 
-// var hours = [];
-
-// for(var i=0; i>=-24; i--){
-//   // timestamp for each hour for the last day
-//   var timestamp = moment() - moment.duration(i, 'hours')
-//   timestamp = timestamp.toString();
-//   timestamp = timestamp.substring(0, timestamp.length - 3);
-//   hours.push(timestamp);
-// }
-
-// // combine hour chunks
-// var hoursDurations = hours.map(function(hour, index){
-//   if(index < hours.length - 1){
-//     return hour + '_' + hours[index + 1]
-//   } else return false;
-// });
-
-// hoursDurations.pop();
-// var hoursQuery = hoursDurations.join('-');
-
-// console.log('hours query: ', hoursQuery);
 
 var params = {
     api_key: 'u413851-fe06191fa195a5841a40c089',
@@ -43,32 +22,43 @@ var labels = [];
 
 $.post('https://api.uptimerobot.com/v2/getMonitors', params, function(response, err){
   var monitor = response.monitors[0];
-  console.log('response times: ', monitor.response_times.map(function(response){
+  monitor.response_times.slice(0,20).map(function(response, index){
     points.unshift(response.value);
-    labels.unshift(moment(response.datetime * 1000).fromNow())
-    // return {
-    //   datetime: moment(response.datetime * 1000).fromNow(), 
-    //   value: response.value
-    // }
-  }));
+    labels.unshift(moment(response.datetime * 1000).format('h:mm:ss a'))
+  });
   var ctx = document.getElementById('statusChart').getContext('2d');
   var myLineChart = new Chart(ctx, {
       type: 'line',
       options: {
         lineWidth:4,
         fill:true,
-        backgroundColor: '255,0,255',
-
+        backgroundColor: 'rgba(255,0,255,1)',
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMin: 0,
+              maxTicksLimit: 3,
+            },
+          }],
+          xAxes: [{
+              ticks: {
+                  fontSize: 10,
+                  maxTicksLimit: 7,
+                  maxRotation: 0,
+              }
+          }]
+        },
+        showYLabels: 2,
       },
       data: {
         labels: labels,
         datasets: [
           {
-            data: points // [3, 5, 6, 3, 4],
+            label: 'Response Time',
+            data: points,
+            backgroundColor: 'rgba(255,0,255,.5)',
           },
         ]
       },
-      // options: options
   });
-  // console.log('data: ', data);
 });
