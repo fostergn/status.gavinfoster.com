@@ -1,8 +1,9 @@
-var r = require ('rethinkdb');
-var app = require('express')();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var bodyParser = require('body-parser');
+var app         = require('express')();
+var server      = require('http').createServer(app);
+var io          = require('socket.io')(server);
+var bodyParser  = require('body-parser');
+var kue         = require('kue');
+var statusQueue = kue.createQueue();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -18,25 +19,36 @@ io.on('connection', function(socket){
 
 
 app.post('/incident', function(req, res){
-  res.send('POST request to homepage');
+  console.log('request body: ', req.body);
+
+  // create job
+  var job = statusQueue.create('incident', {
+      title: req.body.title,
+      message: req.body.message,
+  }).delay(req.body.delay).priority('normal').attempts(2).save(function(err){
+    if(!err) console.log(job.id);
+    console.log('job: ', job.data);
+  });
+
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ message: 'successful incident post' }));
 });
 
-// var connection = null;
-// r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
-//     if (err) throw err;
-//     connection = conn;
-
-//     // listen to changes
-//     r.db('status').table('incidents').changes().run(connection, function(err, cursor){
-//       if (err) throw err;
-//       cursor.each(function(err, row) {
-//         if (err) throw err;
-//         console.log(JSON.stringify(row, null, 2));
-
-//         // send to all websocket clients
-//         io.sockets.emit('incident', JSON.stringify(row, null, 2));
-//       });
-//     })
-// });
+statusQueue.process('incident', function(job, done){
+  sendIncident(job.data, done);
+});
 
 server.listen(9000);
+
+function sendIncident(data, done) {
+  // return error
+  // return done(new Error('invalid to address'));
+  let { title, time } = data;
+  // log stuff...
+  console.log('title: ', title);
+  console.log('time: ', time);
+
+  io.sockets.emit('incident', data);
+  
+  done();
+}
