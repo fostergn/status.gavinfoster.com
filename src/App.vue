@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <IncidentList socket=[socket]></IncidentList>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+/*eslint-disable */
+import io from 'socket.io-client'
+import IncidentList from './components/IncidentList'
+
+var socket = io.connect('http://localhost:9000')
 
 export default {
   name: 'app',
   components: {
-    Hello
+    IncidentList
   }
 }
 </script>
