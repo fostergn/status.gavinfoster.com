@@ -5,9 +5,7 @@ var bodyParser  = require('body-parser');
 var kue         = require('kue');
 var statusQueue = kue.createQueue();
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
 app.use(bodyParser.json())
 
 io.on('connection', function(socket){
@@ -20,12 +18,14 @@ io.on('connection', function(socket){
 
 app.post('/incident', function(req, res){
   console.log('request body: ', req.body);
+  var { title, message, delay } = req.body
 
   // create job
   var job = statusQueue.create('incident', {
-      title: req.body.title,
-      message: req.body.message,
-  }).delay(req.body.delay).priority('normal').attempts(2).save(function(err){
+      title,
+      message,
+      time: delay,
+  }).delay(delay).priority('normal').attempts(2).save(function(err){
     if(!err) console.log(job.id);
     console.log('job: ', job.data);
   });
