@@ -5,7 +5,14 @@
     <title>status.gavinfoster.com</title>
   </head>
   <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <ul id="incident__list">
+        <li v-for="incident in incidents" v-bind:class="[incident.code.toString()]">
+          <div>
+            <h4>{{ incident.title }}</h4>
+            <p>{{ incident.time }}</p>
+          </div>
+          <p>{{ incident.message }}</p>
+        </li>
+    </ul>
   </body>
 </html>

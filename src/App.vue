@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <IncidentList socket=[socket]></IncidentList>
+    <IncidentList></IncidentList>
   </div>
 </template>
 
@@ -8,8 +8,6 @@
 /*eslint-disable */
 import io from 'socket.io-client'
 import IncidentList from './components/IncidentList'
-
-var socket = io.connect('http://localhost:9000')
 
 export default {
   name: 'app',

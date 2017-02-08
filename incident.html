@@ -1,0 +1,42 @@
+<html>
+<head>
+<link rel="stylesheet" href="incident.css">
+</head>
+<body>
+  <!--<form action="http://localhost:9000/incident" method="post">
+    <h2>Incident Report</h2>
+    <label for="title">Title</label>
+    <input name="title" /> <br/><br/>
+    message: <input name="message" /> <br/><br/>
+    code: <input name="code" /> <br/><br/>
+    delay: <input name="delay" /> <br/><br/>
+    <input type="submit" value="S u b m i t"/>
+  </form>-->
+<div class="container">
+  <form>
+    <div class="group">      
+      <input type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Title</label>
+    </div>
+    <div class="group">      
+      <input type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Message</label>
+    </div>
+      <!-- Standard Select -->
+      <div class="mdl-selectfield">
+        <label>Standard Select</label>
+        <select class="browser-default">
+          <option value="" disabled selected>Choose code</option>
+          <option value="1">Success</option>
+          <option value="2">Warning</option>
+          <option value="3">Error</option>
+        </select>
+      </div>
+  </form>
+</body>
+</html>
+
