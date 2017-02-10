@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import io from 'socket.io-client'
+import moment from 'moment'
 
 var socket = io.connect('http://localhost:9000')
 
@@ -9,23 +10,23 @@ var socket = io.connect('http://localhost:9000')
 var incidentList = new Vue({
   el: '#incident__list',
   data: {
-    incidents: [
-      {
-        title: 'Library',
-        message: 'At the library',
-        code: 3,
-        time: '332543334'
-      }
-    ]
+    incidents: []
+  },
+  methods: {
+    removeIncident (index) {
+      this.incidents.splice(index, 1)
+    }
   }
 })
 
 socket.on('incident', function (data) {
-  const { title, message, time, code } = data
+  const { title, message, time, code, dispatchTime } = data
   incidentList.incidents.unshift({
     title,
     message,
     time,
-    code
+    code,
+    dispatchYear: moment(dispatchTime * 1).format('D/M/YY'),
+    dispatchTime: moment(dispatchTime * 1).format('h:mm A')
   })
 })

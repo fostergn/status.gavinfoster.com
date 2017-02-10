@@ -3,16 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>status.gavinfoster.com</title>
+    <link rel="stylesheet" href="/static/style.css">
   </head>
   <body>
-    <ul id="incident__list">
-        <li v-for="incident in incidents" v-bind:class="[incident.code.toString()]">
-          <div>
-            <h4>{{ incident.title }}</h4>
-            <p>{{ incident.time }}</p>
+    <div class="status__wrapper">
+      <div class="status__model"></div>
+      <div class="status-chart__wrapper">
+        <canvas id="status-chart" width="500" height="100"></canvas>
+      </div>
+    </div>
+    <ul id="incident__list" class="incident__list">
+        <h3 v-if="incidents.length > 0">Recent Incidents</h3>
+        <li v-on:click="removeIncident(index)" v-for="(incident, index) in incidents" v-bind:class="'incident__item incident__item--' + incident.code.toString()">
+          <div class="incident__header">
+            <h4 class="incident__title">{{ incident.title }}</h4>
+            <p class="incident__time"><span class="incident__year">{{ incident.dispatchYear }} </span>{{ incident.dispatchTime }}</p>
           </div>
-          <p>{{ incident.message }}</p>
+          <p class="incident__content">{{ incident.message }}</p>
         </li>
     </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/static/chart.js"></script>
   </body>
 </html>

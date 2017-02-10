@@ -5,61 +5,47 @@
 <link rel="stylesheet" href="classic.date.css">
 <link rel="stylesheet" href="classic.time.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 <script src="picker.js"></script>
 <script src="picker.date.js"></script>
 <script src="picker.time.js"></script>
 </head>
 <body>
-  <!--<form action="http://localhost:9000/incident" method="post">
-    <h2>Incident Report</h2>
-    <label for="title">Title</label>
-    <input name="title" /> <br/><br/>
-    message: <input name="message" /> <br/><br/>
-    code: <input name="code" /> <br/><br/>
-    delay: <input name="delay" /> <br/><br/>
-    <input type="submit" value="S u b m i t"/>
-  </form>-->
 <div class="form__container">
-  <h3 class="form__header">incident report</h3>
+  <div class="form__header">
+    <h3 class="form__header-title">Incident Report</h3>
+    <a  class="form__header-link" href="http://localhost:3050" target="_blank"><p>View Incidents</p></a>
+  </div>
   <form>
     <div class="group">      
-      <input type="text" required>
+      <input id="form__input--title" type="text" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Title</label>
     </div>
     <div class="group">      
-      <input type="text" required>
+      <input id="form__input--message" type="text" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Message</label>
     </div>
     <div class="group">
       <div class="date__container">
-        <input placeholder="Date" class="datepicker" />
+        <input placeholder="Date"  id="form__input--date" class="datepicker" />
       </div>
       <div class="time__container">
-        <input placeholder="Time" class="timepicker" />
+        <input placeholder="Time"  id="form__input--time" class="timepicker" />
       </div>
     </div>
-    <div class="mdl-selectfield">
-      <label>Standard Select</label>
-      <select class="browser-default">
-        <option class="select__placeholder" value="" disabled selected>Choose code</option>
-        <option value="1">Success</option>
-        <option value="2">Warning</option>
-        <option value="3">Error</option>
-      </select>
-    </div>
+    <ul class="code__list">
+      <li class="init unselected" id="form__input--code">Status Code</li>
+      <li class="code__option code__option--success" data-value="1">Success</li>
+      <li class="code__option code__option--error" data-value="3">Error</li>
+      <li class="code__option code__option--warning" data-value="2">Warning</li>
+    </ul>
     <input class="form__submit" type="submit" value="Submit Incident"/>
   </form>
+  <script src="incident.js"></script>
 </body>
 </html>
-
-<script>
-$(function(){
-  $('.datepicker').pickadate()
-  $('.timepicker').pickatime()
-})
-</script>
 
