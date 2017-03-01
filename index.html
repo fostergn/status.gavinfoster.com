@@ -4,14 +4,18 @@
     <meta charset="utf-8">
     <title>status.gavinfoster.com</title>
     <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
+    <div id="container"></div>
     <div class="status__wrapper">
-      <div class="status__model"></div>
+      <!--<div class="status__model">
+        <canvas id="container"></canvas>
+      </div>-->
       <div class="status-chart__wrapper">
         <canvas id="status-chart" width="500" height="100"></canvas>
       </div>
-    </div>
+    </div> 
     <ul id="incident__list" class="incident__list">
         <h3 v-if="incidents.length > 0">Recent Incidents</h3>
         <li v-on:click="removeIncident(index)" v-for="(incident, index) in incidents" v-bind:class="'incident__item incident__item--' + incident.code.toString()">
@@ -24,7 +28,11 @@
     </ul>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/static/chart.js"></script>
   </body>
+  <script src="/static/three.min.js"></script>
+  <script src="/static/DDSLoader.js"></script>
+  <script src="/static/OBJLoader.js"></script>
+  <script src="/static/MTLLoader.js"></script>
+  <script src="/static/raspberry.js"></script>
 </html>

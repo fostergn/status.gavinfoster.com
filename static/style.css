@@ -54,8 +54,9 @@ table {
 html {
   min-width: 100vw;
   min-height:100vh;
-  background-image: url('https://i.ytimg.com/vi/yGJCJ0JeyKg/maxresdefault.jpg');
+  background-image: url('http://71.62.163.181/stream/video.mjpeg');
   background-size: cover;
+  overflow:hidden;
 }
 
 body {
@@ -192,7 +193,7 @@ iframe {
 }
 
 .status-chart__wrapper {
-  width:80%;
+  width:100%;
   height:150px;
   display:inline-block;
 }
@@ -200,4 +201,18 @@ iframe {
 #status-chart {
   /*position:absolute;
   bottom:0;*/
+}
+
+
+/*
+* model
+*/
+
+#container {
+  min-height:100vh;
+  z-index:1000;
+}
+
+canvas {
+  display:block;
 }
