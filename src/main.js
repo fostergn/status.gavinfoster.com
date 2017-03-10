@@ -4,7 +4,7 @@ import Vue from 'vue'
 import io from 'socket.io-client'
 import moment from 'moment'
 
-var socket = io.connect('http://localhost:9000')
+var socket = io.connect('http://status.gavinfoster.com/socket')
 
 // initialize vue
 var incidentList = new Vue({
@@ -21,6 +21,7 @@ var incidentList = new Vue({
 
 socket.on('incident', function (data) {
   const { title, message, time, code, dispatchTime } = data
+  console.log('data: ', data)
   incidentList.incidents.unshift({
     title,
     message,

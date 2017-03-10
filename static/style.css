@@ -54,7 +54,8 @@ table {
 html {
   min-width: 100vw;
   min-height:100vh;
-  background-image: url('http://71.62.163.181/stream/video.mjpeg');
+  /*background-image: url('http://71.62.163.181/stream/video.mjpeg');*/
+  background-image: url('placeholder.jpg');
   background-size: cover;
   overflow:hidden;
 }

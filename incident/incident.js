@@ -14,7 +14,7 @@ $(function(){
     var message = $('#form__input--message').val();
     var code = $('#form__input--code').attr('data-value');
 
-    $.post('http://localhost:9000/incident', {
+    $.post('http://status.gavinfoster.com:9000/incident', {
       title: title,
       message: message,
       code: code,
