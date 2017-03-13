@@ -29,6 +29,14 @@ io.on('connection', function(socket){
     if (incidents.length){
       console.log('previous incident last: ', incidents[0].data)
       socket.emit('incident', incidents[0].data);
+    } else {
+      // socket.emit('incident', {
+      //   title: 'no messages',
+      //   message: 'no messages',
+      //   code: 1,
+      //   dispatchTime: 1489360203,
+      //   time: 2000
+      // })
     }
   })
 
@@ -43,7 +51,7 @@ app.get('/socket', function(req, res){
 })
 
 
-app.post('/incident', function(req, res){
+app.post('/socket', function(req, res){
   console.log('request body: ', req.body);
   var { title, message, delay, code, dispatchTime } = req.body
 
