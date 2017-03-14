@@ -19,20 +19,19 @@ var incidentList = new Vue({
   }
 })
 
-console.log('socket attempting to connect to : ', socket)
 
 socket.on('connect', function (data) {
-  console.log('connected to socket: ', socket)
+  // console.log('connected to socket: ', socket)
 })
 
 socket.on('connection', function (data) {
-  console.log('connected to socket: ', socket)
+  // console.log('connected to socket: ', socket)
 })
 
 socket.on('incident', function (data) {
-  console.log('incident coming in')
+  // console.log('incident coming in')
   const { title, message, time, code, dispatchTime } = data
-  console.log('data: ', data)
+  // console.log('data: ', data)
   incidentList.incidents.unshift({
     title,
     message,

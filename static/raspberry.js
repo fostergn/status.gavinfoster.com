@@ -15,23 +15,6 @@ function init() {
   var ambient = new THREE.AmbientLight(0xFFFFFF, 4);
   scene.add(ambient);
 
-  // var light = new THREE.PointLight( 0xffff00, 1, 50 );
-  // light.position.set( 0, 40, 0 );
-  // scene.add( light );
-
-  // var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-  // scene.add( light );
-
-  // var hemisphereLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-  // scene.add( hemisphereLight );
-
-  
-  // add box
-  // var geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
-  // var material = new THREE.MeshBasicMaterial({color:0x2194ce});
-  // mesh = new THREE.Mesh( geometry, material );
-  // scene.add( mesh );
-
   renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setClearColor (0x000000, 0);
@@ -42,13 +25,13 @@ function init() {
 
   var manager = new THREE.LoadingManager( manager );
   manager.onProgress = function(item, loaded, total) {
-    console.log(item, loaded, total)
+    // console.log(item, loaded, total)
   };
 
   var onProgress = function(xhr) {
     if(xhr.lengthComputable) {
       var percentComplete = xhr.loaded/xhr.total*100;
-      console.log(Math.round(percentComplete, 2) + '% downloaded');
+      // console.log(Math.round(percentComplete, 2) + '% downloaded');
     }
   };
 
@@ -86,6 +69,8 @@ function onWindowResize() {
 }
 function animate() {
   requestAnimationFrame( animate );
-  raspberry.rotation.y += 0.005;
+  if(raspberry){
+    raspberry.rotation.y += 0.005;
+  }
   renderer.render( scene, camera );
 }

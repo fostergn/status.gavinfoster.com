@@ -1,15 +1,4 @@
-console.log('script working');
 var iframe = document.getElementById('video-stream');
-
-
-// iframe.onload = function(){
-//   console.log('window loaded');
-//   var imageStream = iframe.getElementsByTagName('img')[0];
-
-//   imageStream.style.width = '300px';
-//   imageStream.style.height = '200px';
-// }
-
 
 var params = {
     api_key: 'u413851-fe06191fa195a5841a40c089',

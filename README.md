@@ -28,6 +28,12 @@ npm test
 
 # deploy
 rsync -av dist/ gavin@45.55.67.227:/var/www/status.gavinfoster.com/html
+
+# deploy incident section
+rsync -av incident/ gavin@45.55.67.227:/var/www/status.gavinfoster.com/html/incident
+
+# deploy node application
+rsync -av api.js gavin@45.55.67.227:/var/www/status.gavinfoster.com/html
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
